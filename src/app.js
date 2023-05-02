@@ -8,6 +8,8 @@ import viewsRouter from './routes/views.router.js'
 import userRouter from './routes/user.router.js'
 import './db/dbConfig.js'
 import MongoStore from "connect-mongo";
+import passport from "passport";
+import "./passport/passportStrategie.js"
 
 const app = express ()
 
@@ -41,6 +43,9 @@ app.use(session({
     }
 }))
 
+//Passport
+app.use (passport.initialize())
+app.use (passport.session())
 
 
 //Routes

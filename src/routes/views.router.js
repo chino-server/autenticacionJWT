@@ -3,7 +3,7 @@ import { Router } from "express";
 const router = Router();
 
 router.get("/", (req, res) => {
-  if (req.session.logged) {
+  if (req.user) {
     res.redirect("products");
   } else {
     res.render("login", { title: "Inicia session para ver los productos" });
@@ -15,10 +15,15 @@ router.get("/register", (req, res) => {
 });
 
 router.get("/products", (req, res) => {
-  if (!req.session.email) {
+  if (!req.user) {
     res.redirect("/");
   } else {
-    res.render("products", {user:req.session.email});
+    if (req.user){
+      res.render("products", {user:req.user.email})
+    }
+    else {
+      res.send ({message:'inicar session para ver los productos'})
+    }
   }
 });
 

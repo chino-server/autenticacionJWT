@@ -17,8 +17,9 @@ export default class UserManager {
   }
 
   async getUser (user){
-    const {email,password} = user
-    const userEncontrado = await userModel.find({email, password})
+    const {email} = user
+    const userEncontrado = await userModel.find({email})
+    //console.log(userEncontrado);
     if (userEncontrado.length !==0){
         return userEncontrado
     }else{
